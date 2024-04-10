@@ -15,20 +15,22 @@ def check_data():
         line = ser.readline().decode('utf-8').rstrip()
         data = line.split(',')
         rospy.loginfo(data)
-        if(len(data) >= 2):
+        if(len(data) >= 3):
             try:
                 data[0] = float(data[0])
                 data[1] = float(data[1])
+                data[2] = float(data[2])
+
             except :
                 rospy.logwarn("Data is not a float")
             pose.x = data[0]
             pose.y = data[1]
-            pose.theta = -1
+            pose.theta = data[2]
 
 def talker():
     pub = rospy.Publisher('odometrie', Pose2D, queue_size=10)
     rospy.init_node('odom', anonymous=True)
-    rate = rospy.Rate(20) # 10hz
+    rate = rospy.Rate(100) # 100hz
     while not rospy.is_shutdown():
         check_data()
         rospy.loginfo(pose)
