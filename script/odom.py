@@ -20,13 +20,13 @@ def check_data():
                 data[0] = float(data[0])
                 data[1] = float(data[1])
                 data[2] = float(data[2])
+                
+                pose.x = data[0]
+                pose.y = data[1]
+                pose.theta = data[2]
 
             except :
                 rospy.logwarn("Data is not a float")
-            pose.x = data[0]
-            pose.y = data[1]
-            pose.theta = data[2]
-
 def talker():
     pub = rospy.Publisher('odometrie', Pose2D, queue_size=10)
     rospy.init_node('odom', anonymous=True)
