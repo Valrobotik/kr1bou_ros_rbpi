@@ -16,8 +16,13 @@ def check_data():
         data = line.split(',')
         rospy.loginfo(data)
         if(len(data) >= 2):
-            pose.x = float(data[0])
-            pose.y = float(data[1])
+            try:
+                data[0] = float(data[0])
+                data[1] = float(data[1])
+            except :
+                rospy.logwarn("Data is not a float")
+            pose.x = data[0]
+            pose.y = data[1]
             pose.theta = -1
 
 def talker():
