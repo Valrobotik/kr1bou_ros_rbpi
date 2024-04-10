@@ -4,8 +4,9 @@ from geometry_msgs.msg import Pose2D # type: ignore
 import serial # type: ignor
 
 pose = Pose2D()
-ser : serial.Serial = None
+
 def connect():
+    global ser
     ser = serial.Serial('/dev/ttyACM0', 9600)
     return ser
 
@@ -13,9 +14,11 @@ def check_data():
     if ser.in_waiting > 0:
         line = ser.readline().decode('utf-8').rstrip()
         data = line.split(',')
-        pose.x = float(data[0])
-        pose.y = float(data[1])
-        pose.theta = -1
+        rospy.loginfo(data)
+        if(len(data) >= 2):
+            pose.x = float(data[0])
+            pose.y = float(data[1])
+            pose.theta = -1
 
 def talker():
     pub = rospy.Publisher('odometrie', Pose2D, queue_size=10)
