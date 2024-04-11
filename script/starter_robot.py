@@ -4,6 +4,8 @@ from gpiozero import Button
 from signal import pause
 import rospy
 
+from std_msgs.msg import Bool
+
 # Lorsque la clé est insérée, le robot envoi à un topic ROS un message indiquant que la clé est insérée (type booléen, True si la clé est insérée, False sinon)
 def talker(key):
     pub = rospy.Publisher('starter', Bool, queue_size=10)
