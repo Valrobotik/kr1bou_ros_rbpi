@@ -11,10 +11,12 @@ def connect():
     return ser
 
 def check_data():
+    while ser.in_waiting < 1 and not rospy.is_shutdown():
+        pass
     if ser.in_waiting > 0:
         line = ser.readline().decode('utf-8').rstrip()
         data = line.split(',')
-        rospy.loginfo(data)
+        rospy.loginfo(data)  
         if(len(data) >= 3):
             try:
                 data[0] = float(data[0])
@@ -30,12 +32,10 @@ def check_data():
 def talker():
     pub = rospy.Publisher('odometrie', Pose2D, queue_size=10)
     rospy.init_node('odom', anonymous=True)
-    rate = rospy.Rate(100) # 100hz
     while not rospy.is_shutdown():
         check_data()
         rospy.loginfo(pose)
         pub.publish(pose)
-        rate.sleep()
     
 if __name__ == '__main__':
     try:
