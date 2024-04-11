@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 from gpiozero import Button
 from signal import pause
 import rospy
