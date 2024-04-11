@@ -11,13 +11,16 @@ def talker(key):
     pub = rospy.Publisher('starter', Bool, queue_size=10)
     rospy.init_node('starter_talker', anonymous=True)
     rate = rospy.Rate(10) # 10hz
+    is_key_pressed = False
     while not rospy.is_shutdown():
-        if key.is_pressed:
+        if key.is_pressed and not is_key_pressed:
             rospy.loginfo(True)
             pub.publish(True)
-        else:
+            is_key_pressed = True
+        elif not key.is_pressed and is_key_pressed:
             rospy.loginfo(False)
             pub.publish(False)
+            is_key_pressed = False
         rate.sleep()
 
 if __name__ == '__main__':
