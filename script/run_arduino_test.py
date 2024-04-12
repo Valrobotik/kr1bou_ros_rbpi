@@ -7,7 +7,7 @@ import serial.tools.list_ports # type: ignore
 pose = Pose2D()
 
 def connect():
-    print(list(serial.tools.list_ports.comports()))
+    print(serial.tools.list_ports.comports()[0].device)
     ser = serial.Serial('/dev/ttyACM0', 9600)
     return ser
     
