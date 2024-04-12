@@ -8,7 +8,7 @@ pose = Pose2D()
 
 def connect():
     print(serial.tools.list_ports.comports()[0].device)
-    ser = serial.Serial('/dev/ttyACM0', 9600)
+    ser = serial.Serial(serial.tools.list_ports.comports()[0].device, 9600)
     return ser
     
 if __name__ == '__main__':
