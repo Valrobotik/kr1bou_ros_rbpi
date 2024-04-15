@@ -7,6 +7,7 @@ import time
 
 def main():
     pub = rospy.Publisher('cmd_vel', Twist, queue_size=10)
+    time.sleep(0.5)
     speed = Twist()
     speed.linear.x = 0.2
     speed.angular.z = 0.2
