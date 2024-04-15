@@ -11,10 +11,12 @@ def main():
     speed.linear.x = 0.2
     speed.angular.z = 0.2  
     pub.publish(speed)
+    print("speed go")
     time.sleep(3)
     speed.linear.x = 0
     speed.angular.z = 0
     pub.publish(speed)
+    print("speed stop")
 
 if __name__ == '__main__':
     try:
