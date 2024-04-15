@@ -14,7 +14,7 @@ def connect_arduino():
     for p in ports:
         ser = serial.Serial(p.device, 9600)
         ser.write(b'N')
-        if ser.readline().replace('\n', '') == b'Motor':
+        if "Motor" in ser.readline():
             rospy.loginfo(f'Arduino Motor connected on {p.device}')
             return ser
         rospy.logwarn(f'Arduino Motor not found on {p.device}')
