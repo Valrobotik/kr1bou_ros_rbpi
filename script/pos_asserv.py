@@ -103,7 +103,7 @@ def update_moteur(allow_backward: bool):
     current_speed.linear.x = left_speed
     current_speed.angular.z = right_speed
 
-    pub.Publish(current_speed)
+    pub.publish(current_speed)
 
     last_left_speed = left_speed
     last_right_speed = right_speed
