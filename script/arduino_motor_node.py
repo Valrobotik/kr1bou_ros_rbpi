@@ -44,7 +44,7 @@ def receive_odometry():
             position.theta = -1
             rospy.logwarn('Data is not a float')
             rospy.logwarn(data)
-        rate.sleep()
+            rate.sleep()
 
 def send_speed(speed: Twist):
     global ser
