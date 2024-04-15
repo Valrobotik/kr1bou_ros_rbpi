@@ -12,7 +12,7 @@ def connect_arduino():
     global ser
     ports = list(serial.tools.list_ports.comports())
     for p in ports:
-        ser = serial.Serial(p.device, 9600)
+        ser = serial.Serial(p.device, 9600, timeout=0.5)
         ser.write(b'NR')
         rep = str(ser.readline())
         print(rep)
