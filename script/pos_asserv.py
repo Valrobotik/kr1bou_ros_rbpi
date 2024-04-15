@@ -16,8 +16,6 @@ state = READY
 objectif_x = 0
 objectif_y = 0
 
-
-
 xy = [(0.5, 0.0), (0.5, 0.5), (0.0, 0.5), (0.0, 0.0)]
 def main():
     global pub, objectif_x, objectif_y,index
@@ -31,6 +29,7 @@ def main():
         
 def update_pos(data):
     global position
+    rospy.loginfo(data)
     position = data
 
 if __name__ == '__main__':
