@@ -25,10 +25,10 @@ def connect_arduino():
 
 
 def receive_odometry(hey):
-    print("coucou odometry")
     global ser, pub
     position = Pose2D()
     data = str(ser.read_until(b'R')).replace('b', '').replace("'", '').replace('\\r\\n', '').replace('R', '')
+    print(data)
     data = data.split(',')
     try:
         position.x = float(data[0])
