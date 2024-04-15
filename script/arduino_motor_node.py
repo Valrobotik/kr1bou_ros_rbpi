@@ -24,7 +24,7 @@ def connect_arduino():
     raise Exception('Arduino Motor not found')
 
 
-def receive_odometry():
+def receive_odometry(hey):
     global ser, pub
     position = Pose2D()
     data = str(ser.readline()).replace('b', '').replace("'", '').replace('\\r\\n', '')
