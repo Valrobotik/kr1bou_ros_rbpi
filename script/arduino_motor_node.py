@@ -66,6 +66,7 @@ if __name__ == '__main__':
 
         connect_arduino()
         #receive_odometry()
+        rospy.spin()
     except rospy.ROSInterruptException:
         rospy.loginfo('Node killed')
 
