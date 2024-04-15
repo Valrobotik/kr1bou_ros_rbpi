@@ -49,10 +49,12 @@ def receive_odometry():
 def send_speed(speed: Twist):
     global ser
     ser.write(f"V{speed.linear.x},{speed.angular.z}\n".encode())
+    print(f"V{speed.linear.x},{speed.angular.z}\n")
 
 def corect_odom(odom: Pose2D):
     global ser
     ser.write(f"O{odom.x},{odom.y},{odom.theta}\n".encode())
+    print(f"O{odom.x},{odom.y},{odom.theta}\n")
 
 
 if __name__ == '__main__':
@@ -63,7 +65,7 @@ if __name__ == '__main__':
         rospy.Subscriber('odom_correction', Pose2D, corect_odom)
 
         connect_arduino()
-        receive_odometry()
+        #receive_odometry()
     except rospy.ROSInterruptException:
         rospy.loginfo('Node killed')
 
