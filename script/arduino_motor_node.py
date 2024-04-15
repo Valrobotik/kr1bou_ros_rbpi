@@ -31,9 +31,9 @@ def receive_odometry():
     while not rospy.is_shutdown():
         while not rospy.is_shutdown() and ser.in_waiting < 1:
             pass
-        data = ser.readline()
+        data = str(ser.readline()).replace('b', '').replace("'", '').replace('\\r\\n', '')
         print(data)
-        data.split(b',')
+        data.split(',')
         try:
             position.x = float(data[0])
             position.y = float(data[1])
