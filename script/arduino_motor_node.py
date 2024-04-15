@@ -59,7 +59,7 @@ def corect_odom(odom: Pose2D):
 
 if __name__ == '__main__':
     try:
-        rospy.init_node('arduino_motor_node') #node init
+        rospy.init_node('arduino_motor_node', anonymous=True) #node init
         pub = rospy.Publisher('odometrie', Pose2D, queue_size=10)
         ########## subscribe to topic /cmd_vel & /odom_correction ##########
         rospy.Subscriber('cmd_vel', Twist, send_speed)
