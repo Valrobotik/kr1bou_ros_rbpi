@@ -35,9 +35,9 @@ def receive_odometry():
         data = data.split(',')
         print(data)
         try:
-            position.x = float(data[0].replace('.', ','))
-            position.y = float(data[1].replace('.', ','))
-            position.theta = float(data[2].replace('.', ','))
+            position.x = float(data[0])
+            position.y = float(data[1])
+            position.theta = float(data[2])
             rospy.loginfo(position)
             pub.publish(position)
         except:
