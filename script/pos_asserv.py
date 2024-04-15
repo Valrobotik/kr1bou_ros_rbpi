@@ -26,7 +26,7 @@ def main():
         
 def update_pos(data):
     global position
-    rospy.loginfo(data)
+    #rospy.loginfo(data)
     position = data
 
 if __name__ == '__main__':
