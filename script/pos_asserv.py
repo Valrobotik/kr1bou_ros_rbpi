@@ -103,6 +103,7 @@ def update_moteur(allow_backward: bool):
     current_speed.linear.x = left_speed
     current_speed.angular.z = right_speed
 
+    rospy.loginfo(f"Left: {left_speed}, Right: {right_speed}")
     pub.publish(current_speed)
 
     last_left_speed = left_speed
