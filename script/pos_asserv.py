@@ -41,11 +41,12 @@ if __name__ == '__main__':
         pub = rospy.Publisher('cmd_mot', Pose2D, queue_size=10)
         time.sleep(1)
         main()
-        rate = rospy.Rate(10)
-        while not rospy.is_shutdown():
-            if math.sqrt((position.x - objectif_x)**2 + (position.y - objectif_y)**2) < 0.05:
-                main()
-            rate.sleep()
-            
+        # rate = rospy.Rate(10)
+        # while not rospy.is_shutdown():
+        #     if math.sqrt((position.x - objectif_x)**2 + (position.y - objectif_y)**2) < 0.05:
+        #         main()
+        #     rate.sleep()
+        rospy.spin()
+
     except rospy.ROSInterruptException:
         pass
