@@ -47,9 +47,9 @@ def receive_odometry(hey):
 
 def send_speed(speed: Twist):
     global ser
-    rospy.loginfo(f"V{speed.linear.x};{speed.angular.z}R")
+    rospy.loginfo(f"V{format(speed.linear.x, '.2f')};{format(speed.angular.z, '.2f')}R\n")
     try:
-        ser.write(f"V{speed.linear.x};{speed.angular.z}R\n".encode())
+        ser.write(f"V{format(speed.linear.x, '.2f')};{format(speed.angular.z, '.2f')}R\n".encode())
     except:
         rospy.logwarn("Error while sending speed")
 
