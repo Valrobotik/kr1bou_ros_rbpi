@@ -111,7 +111,7 @@ def update_moteur(allow_backward: bool):
 
 def main():
     global pub, objectif_x, objectif_y
-    pub = rospy.Publisher('cmd_vel', Twist, queue_size=10)
+    pub = rospy.Publisher('cmd_mot', Twist, queue_size=10)
     objectif_x = 0.5
     objectif_y = 0.0
     while not rospy.is_shutdown():

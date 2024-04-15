@@ -21,7 +21,7 @@ def connect_arduino():
             return ser
         rospy.logwarn(f'Arduino Motor not found on {p.device}')
         ser.close()
-    raise Exception('Arduino Motor not found')
+    raise Exception('Arduino Motor not found') 
 
 
 def receive_odometry(hey):
@@ -45,11 +45,11 @@ def receive_odometry(hey):
         rospy.logwarn(data)
 
 
-def send_speed(speed: Twist):
+def send_pos(pos: Pose2D):
     global ser
-    rospy.loginfo(f"V{format(speed.linear.x, '.2f')};{format(speed.angular.z, '.2f')}R\n")
+    rospy.loginfo(f"P{format(pos.x, '.3f')};{format(pos.y, '.2f')}R\n")
     try:
-        ser.write(f"V{format(speed.linear.x, '.2f')};{format(speed.angular.z, '.2f')}R\n".encode())
+        ser.write(f"P{format(pos.x, '.2f')};{format(pos.y, '.2f')}R\n".encode())
     except:
         rospy.logwarn("Error while sending speed")
 
@@ -64,7 +64,7 @@ if __name__ == '__main__':
         rospy.init_node('arduino_motor_node', anonymous=True) #node init
         pub = rospy.Publisher('odometrie', Pose2D, queue_size=10)
         ########## subscribe to topic /cmd_vel & /odom_correction ##########
-        rospy.Subscriber('cmd_vel', Twist, send_speed)
+        rospy.Subscriber('cmd_mot', Pose2D, send_pos)
         rospy.Subscriber('odom_correction', Pose2D, corect_odom)
 
         connect_arduino()
