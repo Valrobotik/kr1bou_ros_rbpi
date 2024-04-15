@@ -17,10 +17,10 @@ objectif_x = 0
 objectif_y = 0
 
 
-index = 0
+
 xy = [(0.5, 0.0), (0.5, 0.5), (0.0, 0.5), (0.0, 0.0)]
 def main():
-    global pub, objectif_x, objectif_y
+    global pub, objectif_x, objectif_y,index
     pub = rospy.Publisher('cmd_mot', Pose2D, queue_size=10)
     time.sleep(1)
     
@@ -37,6 +37,7 @@ def update_pos(data):
 
 if __name__ == '__main__':
     try:
+        index = 0
         rospy.init_node('pos_asserv', anonymous=True) #node init
         rospy.Subscriber('odometrie', Pose2D, update_pos)
         main()
