@@ -13,12 +13,9 @@ READY = 1
 position = Pose2D()
 state = READY
 
-objectif_x = 0
-objectif_y = 0
-
 xy = [(0.5, 0.0), (0.5, 0.5), (0.0, 0.5), (0.0, 0.0)]
 def main():
-    global pub, objectif_x, objectif_y,index
+    global pub, objectif,index
     objectif = Pose2D()
     objectif.x = xy[index][0]
     objectif.y = xy[index][1]
@@ -42,9 +39,9 @@ if __name__ == '__main__':
         main()
         rate = rospy.Rate(10)
         while not rospy.is_shutdown():
-            if math.sqrt((position.x - objectif_x)**2 + (position.y - objectif_y)**2) < 0.05:
-                rospy.loginfo(math.sqrt((position.x - objectif_x)**2 + (position.y - objectif_y)**2))
-                rospy.loginfo(f"objectif_x: {objectif_x} objectif_y: {objectif_y}")
+            if math.sqrt((position.x - objectif.x)**2 + (position.y - objectif.y)**2) < 0.05:
+                rospy.loginfo(math.sqrt((position.x - objectif.x)**2 + (position.y - objectif.y)**2))
+                rospy.loginfo(f"objectif_x: {objectif.x} objectif_y: {objectif.y}")
                 rospy.loginfo(f"position.x: {position.x} position.y: {position.y}")
                 main()
             rate.sleep()
