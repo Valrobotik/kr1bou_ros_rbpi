@@ -30,8 +30,7 @@ def receive_odometry():
     position = Pose2D()
     rate = rospy.Rate(20)
     while not rospy.is_shutdown():
-        while not rospy.is_shutdown() and ser.in_waiting < 1:
-            rate.sleep()
+        rate.sleep()
         data = str(ser.readline()).replace('b', '').replace("'", '').replace('\\r\\n', '')
         data = data.split(',')
         try:
