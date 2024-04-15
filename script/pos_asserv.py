@@ -110,7 +110,7 @@ def update_moteur(allow_backward: bool):
     last_right_speed = right_speed
 
 def main():
-    global pub
+    global pub, objectif_x, objectif_y
     pub = rospy.Publisher('cmd_vel', Twist, queue_size=10)
     objectif_x = 0.5
     objectif_y = 0.0
