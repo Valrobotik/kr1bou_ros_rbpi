@@ -74,7 +74,6 @@ if __name__ == '__main__':
             # do whatever you want here
             if ser.in_waiting > 0:
                 receive_odometry(ser)
-            rate.sleep()  # sleep for one second
 
     except rospy.ROSInterruptException:
         rospy.loginfo('Node killed')
