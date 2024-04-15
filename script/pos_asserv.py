@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import rospy #type: ignore
 
 from geometry_msgs.msg import Pose2D, Twist #type: ignore
