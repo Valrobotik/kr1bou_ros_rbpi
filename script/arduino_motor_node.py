@@ -28,9 +28,10 @@ def receive_odometry():
     global ser
     pub = rospy.Publisher('odometrie', Pose2D, queue_size=10)
     position = Pose2D()
+    rate = rospy.Rate(100)
     while not rospy.is_shutdown():
         while not rospy.is_shutdown() and ser.in_waiting < 1:
-            pass
+            rate.sleep()
         data = str(ser.readline()).replace('b', '').replace("'", '').replace('\\r\\n', '')
         data = data.split(',')
         print(data)
