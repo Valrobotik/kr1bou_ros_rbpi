@@ -67,9 +67,14 @@ if __name__ == '__main__':
         rospy.Subscriber('odom_correction', Pose2D, corect_odom)
 
         connect_arduino()
-        timer = rospy.Timer(rospy.Duration(0.05), receive_odometry)
-        rospy.spin()
-        timer.shutdown()
+
+        rate = rospy.Rate(40)       
+        while not rospy.is_shutdown():
+            # do whatever you want here
+            if ser.in_waiting > 0:
+                receive_odometry(ser)
+            rate.sleep(1)  # sleep for one second
+
     except rospy.ROSInterruptException:
         rospy.loginfo('Node killed')
 
