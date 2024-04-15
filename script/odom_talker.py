@@ -12,7 +12,7 @@ def connect():
     return ser
 
 def check_data():
-    pub = rospy.Publisher('odometrie', Pose2D, queue_size=10)
+    pub = rospy.Publisher('odometrie', Pose2D, queue_size=1)
     while not rospy.is_shutdown():
         while ser.in_waiting < 1 and not rospy.is_shutdown():
             pass

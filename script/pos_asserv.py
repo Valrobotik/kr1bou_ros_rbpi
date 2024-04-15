@@ -34,7 +34,7 @@ if __name__ == '__main__':
         index = 0
         rospy.init_node('pos_asserv', anonymous=True) #node init
         rospy.Subscriber('odometrie', Pose2D, update_pos)
-        pub = rospy.Publisher('cmd_mot', Pose2D, queue_size=10)
+        pub = rospy.Publisher('cmd_mot', Pose2D, queue_size=1)
         time.sleep(1)
         main()
         rate = rospy.Rate(10)
