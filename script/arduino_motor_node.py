@@ -38,13 +38,14 @@ def receive_odometry():
             position.x = float(data[0])
             position.y = float(data[1])
             position.theta = float(data[2])
-            rospy.loginfo(position)
+            #rospy.loginfo(position)
             pub.publish(position)
         except:
             position.x = -1
             position.y = -1
             position.theta = -1
             rospy.logwarn('Data is not a float')
+            rospy.logwarn(data)
 
 def send_speed(speed: Twist):
     global ser
@@ -65,7 +66,7 @@ if __name__ == '__main__':
         rospy.Subscriber('odom_correction', Pose2D, corect_odom)
 
         connect_arduino()
-        #receive_odometry()
+        receive_odometry()
         rospy.spin()
     except rospy.ROSInterruptException:
         rospy.loginfo('Node killed')
