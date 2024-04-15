@@ -32,12 +32,12 @@ def receive_odometry():
         while not rospy.is_shutdown() and ser.in_waiting < 1:
             pass
         data = str(ser.readline()).replace('b', '').replace("'", '').replace('\\r\\n', '')
-        print(data)
         data.split(',')
+        print(data)
         try:
-            position.x = float(data[0])
-            position.y = float(data[1])
-            position.theta = float(data[2])
+            position.x = float(data[0].replace('.', ','))
+            position.y = float(data[1].replace('.', ','))
+            position.theta = float(data[2].replace('.', ','))
             rospy.loginfo(position)
             pub.publish(position)
         except:
