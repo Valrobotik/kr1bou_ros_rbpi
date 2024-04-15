@@ -66,7 +66,7 @@ if __name__ == '__main__':
         rospy.Subscriber('odom_correction', Pose2D, corect_odom)
 
         connect_arduino()
-        receive_odometry()
+        #receive_odometry()
         rospy.spin()
     except rospy.ROSInterruptException:
         rospy.loginfo('Node killed')
