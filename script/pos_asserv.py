@@ -24,6 +24,7 @@ def main():
     objectif = Pose2D()
     objectif.x = xy[index][0]
     objectif.y = xy[index][1]
+    pub.publish(objectif)
     index += 1
     if index >= len(xy):
         index = 0
