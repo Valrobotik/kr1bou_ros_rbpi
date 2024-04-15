@@ -9,12 +9,14 @@ def main():
     pub = rospy.Publisher('cmd_vel', Twist, queue_size=10)
     speed = Twist()
     speed.linear.x = 0.2
-    speed.angular.z = 0.2  
+    speed.angular.z = 0.2
+    rospy.loginfo(speed)  
     pub.publish(speed)
     print("speed go")
     time.sleep(3)
     speed.linear.x = 0
     speed.angular.z = 0
+    rospy.loginfo(speed)
     pub.publish(speed)
     print("speed stop")
 

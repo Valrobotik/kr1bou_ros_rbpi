@@ -46,13 +46,13 @@ def receive_odometry():
             position.theta = -1
             rospy.logwarn('Data is not a float')
 
-def send_speed(speed):
+def send_speed(speed: Twist):
     global ser
-    ser.write(f"V{speed.linear.x},{speed.angular.z}".encode())
+    ser.write(f"V{speed.linear.x},{speed.angular.z}\n".encode())
 
-def corect_odom(odom):
+def corect_odom(odom: Pose2D):
     global ser
-    ser.write(f"O{odom.x},{odom.y},{odom.theta}".encode())
+    ser.write(f"O{odom.x},{odom.y},{odom.theta}\n".encode())
 
 
 if __name__ == '__main__':
