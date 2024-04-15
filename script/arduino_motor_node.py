@@ -30,7 +30,6 @@ def receive_odometry():
     position = Pose2D()
     rate = rospy.Rate(20)
     while not rospy.is_shutdown():
-        rate.sleep()
         data = str(ser.readline()).replace('b', '').replace("'", '').replace('\\r\\n', '')
         data = data.split(',')
         try:
@@ -45,6 +44,7 @@ def receive_odometry():
             position.theta = -1
             rospy.logwarn('Data is not a float')
             rospy.logwarn(data)
+        rate.sleep()
 
 def send_speed(speed: Twist):
     global ser
