@@ -13,7 +13,7 @@ def connect_arduino():
     ports = list(serial.tools.list_ports.comports())
     for p in ports:
         ser = serial.Serial(p.device, 9600)
-        ser.write(b'N')
+        ser.write(b'NR')
         rep = str(ser.readline())
         print(rep)
         if "Motor" in rep:
@@ -45,9 +45,9 @@ def receive_odometry(hey):
 
 def send_speed(speed: Twist):
     global ser
-    rospy.loginfo(f"V{speed.linear.x};{speed.angular.z}")
+    rospy.loginfo(f"V{speed.linear.x};{speed.angular.z}R")
     try:
-        ser.write(f"V{speed.linear.x};{speed.angular.z}\n".encode())
+        ser.write(f"V{speed.linear.x};{speed.angular.z}R\n".encode())
     except:
         rospy.logwarn("Error while sending speed")
 
