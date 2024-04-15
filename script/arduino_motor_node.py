@@ -34,7 +34,6 @@ def receive_odometry():
             rate.sleep()
         data = str(ser.readline()).replace('b', '').replace("'", '').replace('\\r\\n', '')
         data = data.split(',')
-        print(data)
         try:
             position.x = float(data[0])
             position.y = float(data[1])
