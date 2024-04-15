@@ -25,30 +25,27 @@ def connect_arduino():
 
 
 def receive_odometry():
-    global ser
-    pub = rospy.Publisher('odometrie', Pose2D, queue_size=10)
+    global ser, pub
     position = Pose2D()
-    rate = rospy.Rate(20)
-    while not rospy.is_shutdown():
-        data = str(ser.readline()).replace('b', '').replace("'", '').replace('\\r\\n', '')
-        data = data.split(',')
-        try:
-            position.x = float(data[0])
-            position.y = float(data[1])
-            position.theta = float(data[2])
-            #rospy.loginfo(position)
-            pub.publish(position)
-        except:
-            position.x = -1
-            position.y = -1
-            position.theta = -1
-            rospy.logwarn('Data is not a float')
-            rospy.logwarn(data)
-            rate.sleep()
+    data = str(ser.readline()).replace('b', '').replace("'", '').replace('\\r\\n', '')
+    data = data.split(',')
+    try:
+        position.x = float(data[0])
+        position.y = float(data[1])
+        position.theta = float(data[2])
+        #rospy.loginfo(position)
+        pub.publish(position)
+    except:
+        position.x = -1
+        position.y = -1
+        position.theta = -1
+        rospy.logwarn('Data is not a float')
+        rospy.logwarn(data)
+
 
 def send_speed(speed: Twist):
     global ser
-    rospy.loginfo(f"V{speed.linear.x};{speed.angular.z}\n")
+    rospy.loginfo(f"V{speed.linear.x};{speed.angular.z}")
     try:
         ser.write(f"V{speed.linear.x};{speed.angular.z}\n".encode())
     except:
@@ -63,13 +60,15 @@ def corect_odom(odom: Pose2D):
 if __name__ == '__main__':
     try:
         rospy.init_node('arduino_motor_node') #node init
+        pub = rospy.Publisher('odometrie', Pose2D, queue_size=10)
         ########## subscribe to topic /cmd_vel & /odom_correction ##########
         rospy.Subscriber('cmd_vel', Twist, send_speed)
         rospy.Subscriber('odom_correction', Pose2D, corect_odom)
 
         connect_arduino()
-        receive_odometry()
+        timer = rospy.Timer(rospy.Duration(0.05), receive_odometry)
         rospy.spin()
+        timer.shutdown()
     except rospy.ROSInterruptException:
         rospy.loginfo('Node killed')
 
