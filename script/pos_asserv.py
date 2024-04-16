@@ -13,7 +13,7 @@ READY = 1
 position = Pose2D()
 state = READY
 
-xy = [(1.0, 0.0), (1.0, 1.5), (0.0, 1.5), (0.0, 0.0)]
+xy = [(1.5, 0.75), (1.5, -0.75), (0.15, 0.0), (1.4, 0.0)]
 def main():
     global pub, objectif,index
     objectif = Pose2D()
