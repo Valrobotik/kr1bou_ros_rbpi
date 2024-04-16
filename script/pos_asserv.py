@@ -40,10 +40,10 @@ if __name__ == '__main__':
         rate = rospy.Rate(10)
         while not rospy.is_shutdown():
             if math.sqrt((position.x - objectif.x)**2 + (position.y - objectif.y)**2) < 0.05:
+                main()
                 rospy.loginfo(math.sqrt((position.x - objectif.x)**2 + (position.y - objectif.y)**2))
                 rospy.loginfo(f"objectif_x: {objectif.x} objectif_y: {objectif.y}")
                 rospy.loginfo(f"position.x: {position.x} position.y: {position.y}")
-                main()
             rate.sleep()
         rospy.spin()
 
