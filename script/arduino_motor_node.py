@@ -47,7 +47,7 @@ def receive_odometry(hey):
 
 def send_pos(pos: Pose2D):
     global ser
-    rospy.loginfo(f"P{format(pos.x, '.3f')};{format(pos.y, '.2f')}R\n")
+    rospy.loginfo(f"P{format(pos.x, '.2f')};{format(pos.y, '.2f')}R\n")
     try:
         ser.write(f"P{format(pos.x, '.2f')};{format(pos.y, '.2f')}R\n".encode())
     except:
