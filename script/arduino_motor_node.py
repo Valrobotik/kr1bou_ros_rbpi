@@ -7,6 +7,7 @@ from geometry_msgs.msg import Pose2D, Twist #type: ignore
 
 import serial #type: ignore
 import serial.tools.list_ports #type: ignore
+import time 
 
 def connect_arduino():
     global ser
@@ -29,7 +30,7 @@ def receive_odometry(hey):
     position = Pose2D()
     data = str(ser.read_until(b'R')).replace('b', '').replace("'", '').replace('\\r\\n', '').replace('R', '')
     ser.reset_input_buffer()
-    print(data)
+    #print(data)
     data = data.split(';')
     try:
         position.x = float(data[0])
@@ -55,8 +56,11 @@ def send_pos(pos: Pose2D):
 
 def corect_odom(odom: Pose2D):
     global ser
-    ser.write(f"O{odom.x};{odom.y};{odom.theta}\n".encode())
-    print(f"O{odom.x};{odom.y};{odom.theta}\n")
+    rospy.loginfo(f"O{odom.x};{odom.y};{odom.theta}R\n")
+    try:
+        ser.write(f"O{odom.x};{odom.y};{odom.theta}R\n".encode())
+    except:
+        rospy.logwarn("Error while sending correction")
 
 
 if __name__ == '__main__':
@@ -68,8 +72,15 @@ if __name__ == '__main__':
         rospy.Subscriber('odom_correction', Pose2D, corect_odom)
 
         connect_arduino()
+        time.sleep(1)
+        curent_odom = Pose2D()
+        curent_odom.x = 0.0
+        curent_odom.y = 1.0
+        curent_odom.theta = 0.0
+        corect_odom(curent_odom)
 
-        rate = rospy.Rate(40)       
+        rate = rospy.Rate(40)  
+        rospy.loginfo('Node started')     
         while not rospy.is_shutdown():
             # do whatever you want here
             if ser.in_waiting > 0:
