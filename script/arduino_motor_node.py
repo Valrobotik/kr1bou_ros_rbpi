@@ -76,7 +76,7 @@ if __name__ == '__main__':
         curent_odom = Pose2D()
         curent_odom.x = 0.0
         curent_odom.y = 1.0
-        curent_odom.theta = 0.0
+        curent_odom.theta = 0.12
         corect_odom(curent_odom)
 
         rate = rospy.Rate(40)  
