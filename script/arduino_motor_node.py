@@ -30,7 +30,7 @@ def receive_odometry(hey):
     data = str(ser.read_until(b'R')).replace('b', '').replace("'", '').replace('\\r\\n', '').replace('R', '')
     ser.reset_input_buffer()
     print(data)
-    data = data.split(',')
+    data = data.split(';')
     try:
         position.x = float(data[0])
         position.y = float(data[1])
