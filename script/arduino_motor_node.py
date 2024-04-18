@@ -66,7 +66,7 @@ def corect_odom(odom: Pose2D):
 def emergency_stop(emergency: Bool):
     pass #TODO
 
-def start_motors():
+def start_motors(x: Bool):
     pass #TODO
 
 if __name__ == '__main__':
