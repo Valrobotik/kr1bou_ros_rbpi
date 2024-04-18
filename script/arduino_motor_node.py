@@ -3,6 +3,7 @@
 import rospy #type: ignore
 
 from geometry_msgs.msg import Pose2D, Twist #type: ignore
+from std_msgs.msg import Bool #type: ignore
 
 
 import serial #type: ignore
@@ -62,6 +63,11 @@ def corect_odom(odom: Pose2D):
     except:
         rospy.logwarn("Error while sending correction")
 
+def emergency_stop(emergency: Bool):
+    pass #TODO
+
+def start_motors():
+    pass #TODO
 
 if __name__ == '__main__':
     try:
@@ -69,7 +75,9 @@ if __name__ == '__main__':
         pub = rospy.Publisher('odometrie', Pose2D, queue_size=1)
         ########## subscribe to topic /cmd_vel & /odom_correction ##########
         rospy.Subscriber('cmd_mot', Pose2D, send_pos)
-        rospy.Subscriber('odom_correction', Pose2D, corect_odom)
+        rospy.Subscriber('odom_correction   ', Pose2D, corect_odom)
+        rospy.Subscriber('emergency', Bool, emergency_stop)
+        rospy.Subscriber('starter', Bool, start_motors)
 
         connect_arduino()
         time.sleep(1)
@@ -77,7 +85,7 @@ if __name__ == '__main__':
         curent_odom.x = 0.0
         curent_odom.y = 1.0
         curent_odom.theta = 0.12
-        corect_odom(curent_odom)
+        #corect_odom(curent_odom)
 
         rate = rospy.Rate(40)  
         rospy.loginfo('Node started')     

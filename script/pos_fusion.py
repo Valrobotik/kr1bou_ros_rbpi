@@ -16,7 +16,7 @@ def updateCamera(camera:Pose2D):
 
 def fusion():
     global odometer_value, camera_value
-    pub = rospy.Publisher('position', Pose2D, queue_size=10)
+    pub = rospy.Publisher('position', Pose2D, queue_size=1)
     rate = rospy.Rate(20) # 20hz
     while not rospy.is_shutdown():
         # Fusion des données
