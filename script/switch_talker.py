@@ -15,7 +15,7 @@ sw3_state = False
 sw4_state = False
 
 # Lorsque la clé est insérée, le robot envoi à un topic ROS un message indiquant que la clé est insérée (type booléen, True si la clé est insérée, False sinon)
-def talker(key):
+def talker():
     pub = rospy.Publisher('switch', Byte, queue_size=10)
     rate = rospy.Rate(20) # 20hz
     
