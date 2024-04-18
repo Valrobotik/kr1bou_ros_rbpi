@@ -20,10 +20,10 @@ def talker():
     sw3 = Button(5)
     sw4 = Button(6)
 
-    sw1_state = sw1.is_not_pressed
-    sw2_state = sw2.is_not_pressed
-    sw3_state = sw3.is_not_pressed
-    sw4_state = sw4.is_not_pressed
+    sw1_state = False
+    sw2_state = False
+    sw3_state = False
+    sw4_state = False
 
     while not rospy.is_shutdown():
         if (sw1.is_pressed and not sw1_state) or (sw2.is_pressed and not sw2_state) or (sw3.is_pressed and not sw3_state) or (sw4.is_pressed and not sw4_state) or  (not sw1.is_pressed and sw1_state) or (not sw2.is_pressed and sw2_state) or (not sw3.is_pressed and sw3_state) or (not sw4.is_pressed and sw4_state):
