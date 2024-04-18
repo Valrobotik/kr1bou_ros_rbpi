@@ -44,6 +44,8 @@ if __name__ == '__main__':
         rospy.Subscriber('starter', Bool, update_starter)
         pub = rospy.Publisher('cmd_mot', Pose2D, queue_size=1)
         time.sleep(1)
+        while starter.data == True and not rospy.is_shutdown():
+            pass
         main()
         rate = rospy.Rate(10)
         while not rospy.is_shutdown() and starter.data != True:
