@@ -3,6 +3,7 @@
 import rospy #type: ignore
 
 from geometry_msgs.msg import Pose2D #type: ignore
+from std_msgs.msg import Bool #type: ignore
 import time
 
 import math
@@ -12,6 +13,8 @@ READY = 1
 
 position = Pose2D()
 state = READY
+
+starter = Bool
 
 xy = [(1,0), (1, 1), (0, 1), (0, 0)]
 def main():
@@ -29,16 +32,21 @@ def update_pos(data):
     #rospy.loginfo(data)
     position = data
 
+def update_starter(data):
+    global starter
+    starter = data
+
 if __name__ == '__main__':
     try:
         index = 0
         rospy.init_node('pos_asserv', anonymous=True) #node init
         rospy.Subscriber('odometrie', Pose2D, update_pos)
+        rospy.Subscriber('starter', Bool, update_starter)
         pub = rospy.Publisher('cmd_mot', Pose2D, queue_size=1)
         time.sleep(1)
         main()
         rate = rospy.Rate(10)
-        while not rospy.is_shutdown():
+        while not rospy.is_shutdown() and starter.data != False:
             if math.sqrt((position.x - objectif.x)**2 + (position.y - objectif.y)**2) < 0.05:
                 main()
                 rospy.loginfo(math.sqrt((position.x - objectif.x)**2 + (position.y - objectif.y)**2))
