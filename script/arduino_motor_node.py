@@ -61,7 +61,8 @@ def corect_odom(odom: Pose2D):
     else : theta = odom.theta
     rospy.loginfo(f"O{format(odom.x/100, '.2f')};{format(odom.y/100, '.2f')};{format(theta, '.2f')}R\n")
     try:
-        ser.write(f"O{format(odom.x/100, '.2f')};{format(odom.y/100, '.2f')};{format(theta, '.2f')}R\n".encode())
+        #ser.write(f"O{format(odom.x/100, '.2f')};{format(odom.y/100, '.2f')};{format(theta, '.2f')}R\n".encode())
+        pass
     except:
         rospy.logwarn("Error while sending correction")
 
