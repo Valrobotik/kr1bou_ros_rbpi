@@ -20,7 +20,7 @@ starter = Bool
 
 xy = [(1.5,1), (1, 0.25)]
 def main():
-    global pub, objectif,index
+    global pub,objectif,index
     objectif = Pose2D()
     objectif.x = xy[index][0]
     objectif.y = xy[index][1]
@@ -42,9 +42,9 @@ old_camera_pos = Pose2D()
 def update_camera():
     global position_camera, old_camera_pos, corection_odom_pub 
     old_i = i
-    while old_i == i: 
+    while old_i == i or (position_camera.x == 0 and position_camera.y==0): 
         pass
-    corection_odom_pub.publish(position)
+    corection_odom_pub.publish(position_camera)
 
 i = 0
 def get_camera(data):
