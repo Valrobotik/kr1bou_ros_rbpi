@@ -43,7 +43,7 @@ def update_camera():
     global position_camera, old_camera_pos, corection_odom_pub 
     old_camera_pos = position
     while old_camera_pos == position or (position.x == 0 and position.y == 0): 
-        rospy.loginfo_once("wait for camera")
+        rospy.loginfo("wait for camera")
     corection_odom_pub.publish(position)
 
 
