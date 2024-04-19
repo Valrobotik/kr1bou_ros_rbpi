@@ -18,7 +18,7 @@ state = READY
 
 starter = Bool
 
-xy = [(1,0), (1, 1), (0, 1), (0, 0)]
+xy = [(1.5,1), (1, 0.25)]
 def main():
     global pub, objectif,index
     objectif = Pose2D()
