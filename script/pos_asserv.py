@@ -68,11 +68,14 @@ if __name__ == '__main__':
             pass
         rospy.loginfo("start send")
         update_camera()
+        time.sleep(0.1)
         main()
+
         rate = rospy.Rate(10)
         while not rospy.is_shutdown() and starter.data != True:
             if math.sqrt((position.x - objectif.x)**2 + (position.y - objectif.y)**2) < 0.05:
                 update_camera()
+                time.sleep(0.1)
                 main()
                 rospy.loginfo(math.sqrt((position.x - objectif.x)**2 + (position.y - objectif.y)**2))
                 rospy.loginfo(f"objectif_x: {objectif.x} objectif_y: {objectif.y}")
