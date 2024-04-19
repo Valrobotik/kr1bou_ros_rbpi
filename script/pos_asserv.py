@@ -42,7 +42,7 @@ old_camera_pos = Pose2D()
 def update_camera():
     global position_camera, old_camera_pos, corection_odom_pub 
     old_i = i
-    rospy.logdebug("attente camera")
+    rospy.loginfo("attente camera")
     while old_i == i or (position_camera.x == 0 and position_camera.y==0): 
         pass
     corection_odom_pub.publish(position_camera)
@@ -66,6 +66,7 @@ if __name__ == '__main__':
         time.sleep(1)
         while starter.data == True and not rospy.is_shutdown():
             pass
+        rospy.loginfo("start send")
         update_camera()
         main()
         rate = rospy.Rate(10)
