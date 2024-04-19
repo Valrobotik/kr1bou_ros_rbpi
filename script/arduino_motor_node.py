@@ -75,7 +75,7 @@ if __name__ == '__main__':
         pub = rospy.Publisher('odometrie', Pose2D, queue_size=1)
         ########## subscribe to topic /cmd_vel & /odom_correction ##########
         rospy.Subscriber('cmd_mot', Pose2D, send_pos)
-        rospy.Subscriber('odom_correction   ', Pose2D, corect_odom)
+        rospy.Subscriber('odom_correction', Pose2D, corect_odom)
         rospy.Subscriber('emergency', Bool, emergency_stop)
         rospy.Subscriber('starter', Bool, start_motors)
 
