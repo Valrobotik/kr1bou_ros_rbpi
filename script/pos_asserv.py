@@ -57,6 +57,7 @@ if __name__ == '__main__':
         rospy.init_node('pos_asserv', anonymous=True) #node init
         rospy.Subscriber('odometrie', Pose2D, update_pos)
         rospy.Subscriber('starter', Bool, update_starter)
+        rospy.Subscriber('camera', Pose2D, get_camera)
         pub = rospy.Publisher('cmd_mot', Pose2D, queue_size=1)
         corection_odom_pub = rospy.Publisher('odom_correction', Pose2D, queue_size=1)
         time.sleep(1)
