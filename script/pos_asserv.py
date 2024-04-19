@@ -41,15 +41,16 @@ def update_starter(data):
 old_camera_pos = Pose2D()
 def update_camera():
     global position_camera, old_camera_pos, corection_odom_pub 
-    old_camera_pos = position
-    while old_camera_pos == position or (position.x == 0 and position.y == 0): 
+    old_i = i
+    while old_i == i: 
         rospy.loginfo("wait for camera")
     corection_odom_pub.publish(position)
 
-
+i = 0
 def get_camera(data):
-    global position_camera    
+    global position_camera , i   
     position_camera = data
+    i = (i+1)%2
     rospy.loginfo("camera send : " + str(position_camera))
 
 
