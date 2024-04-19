@@ -69,7 +69,7 @@ if __name__ == '__main__':
             pass
         rospy.loginfo("start send")
         update_camera()
-        time.sleep(1)
+        time.sleep(5)
         main()
 
         rate = rospy.Rate(10)
